@@ -23,5 +23,13 @@
 </script>
 
 <style>
-
+#navigation{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 </style>

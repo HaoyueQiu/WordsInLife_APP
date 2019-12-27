@@ -14,6 +14,7 @@
       <button type="button" class="btn btn-success" @click="knowWord">认识</button>
       <button type="button" class="btn btn-warning" @click="uncertainWord">不确定</button>
       <button type="button" class="btn btn-danger" @click="unknowWord">不认识</button>
+
     </div>
   </div>
 </template>
@@ -71,14 +72,18 @@
     methods: {
       clickMeaningButton() {
         this.isMeaningButtonClick = true;
+        let x = document.getElementById('wordMem');
+        x.height = "auto";
+        console.log(x);
+        console.log(x.height);
         let audio = document.querySelector('#wordAudio');
+        console.log(audio);
         if (audio) {
           audio.play();
         }
-        ;
       },
       getData() {
-        const path = '/words'
+        const path = '/words';
         this.$axios.get(path,
           {
             params: {
@@ -87,9 +92,9 @@
             }
           })
           .then(response => {
-            console.log(response.data)
+            console.log(response.data);
             this.words = this.words.concat(response.data);
-          })
+          });
 
         for (let i = 0; i != this.words.length; ++i) {
           this.isKnow.push(false);
@@ -193,8 +198,8 @@
 
   #buttonGroup {
     position: fixed;
-    bottom: 0;
     width: 100%;
+    bottom: 56px;
   }
 
   .btn {
@@ -212,10 +217,6 @@
   #wordsImg {
     width: 280px;
     height: 100%;
-  }
-
-  @media screen and (max-width: 1200px) {
-
   }
 
 

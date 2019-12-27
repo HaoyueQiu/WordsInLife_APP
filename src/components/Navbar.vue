@@ -2,8 +2,8 @@
   <div>
     <link rel="stylesheet" href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-    <mu-container>
-      <mu-bottom-nav class="bottomNavigation">
+    <mu-container class="bottomNavigation">
+      <mu-bottom-nav >
         <mu-bottom-nav-item title="单词" icon="restore" to="/wordsSubject"></mu-bottom-nav-item>
         <mu-bottom-nav-item title="游戏" icon="favorite" to="/game"></mu-bottom-nav-item>
         <mu-bottom-nav-item title="统计" icon="timeline" to="/"></mu-bottom-nav-item>
@@ -30,4 +30,9 @@
 
 
 <style>
+  .bottomNavigation{
+    padding-left: 0 !important;
+    padding-right:0;
+
+  }
 </style>

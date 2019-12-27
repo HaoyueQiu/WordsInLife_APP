@@ -1,5 +1,5 @@
 <template>
-  <mu-container>
+  <mu-container class="MuContainer">
     <mu-flex justify-content="center">
       <mu-paper :z-depth="1">
         <mu-grid-list class="gridlist-demo">
@@ -53,6 +53,7 @@
         this.$router.push('WordsSubject/' + wordsubject)
       }
     },
+
     created() {
       this.getData()
     }
@@ -71,6 +72,15 @@
     height: 48px !important;
   }
 
+  .mu-paper-round {
+    width:100%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .MuContainer{
+    margin-bottom: 56px;
+  }
 </style>
 
 

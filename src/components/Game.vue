@@ -1,13 +1,16 @@
 <template>
-  <div class="container">
-    <vue-waterfall-easy :imgsArr="imgsArr" @scrollReachBottom="getData" @click="clickPic">
-      <div class="img-info" slot-scope="props">
-        <p class="some-info">{{props.value.info['word_subject']}}</p>
-      </div>
-    </vue-waterfall-easy>
-    <input v-if="canEditGame" type="file" id="choseFile" @change="onFileChange">
-    <label v-if="canEditGame" for="choseFile" id="editButton" class="btn btn-outline-primary">Edit Game</label>
-  </div>
+  <mu-container class="MuContainer">
+    <mu-flex justify-content="center">
+      <mu-paper :z-depth="1">
+        <mu-grid-list class="gridlist-demo" :cols="1">
+          <mu-grid-tile v-for="tile,index in imgsArr" :key="index" @click="clickPic(tile.img_name)">
+            <img :src="tile.src" >
+            <span slot="title">{{tile.wordSubject}}</span>
+          </mu-grid-tile>
+        </mu-grid-list>
+      </mu-paper>
+    </mu-flex>
+  </mu-container>
 </template>
 
 <script>
@@ -23,7 +26,7 @@
         imgLoc: `static/img/Game/`,
         imgsArr: [],
         group: 0,
-        canEditGame:false,
+        canEditGame: false,
       }
     },
     components: {
@@ -44,21 +47,25 @@
             console.log(response);
             var arr = [];
             for (var i = 0; i < response.data.length; i++) {
-              arr.push({src: this.imgLoc + response.data[i]['EN'] + '.jpg', info: {'word_subject':response.data[i]['word_subject'],'img_name':response.data[i]['EN']}})
+              arr.push({
+                src: this.imgLoc + response.data[i]['EN'] + '.jpg',
+                wordSubject: response.data[i]['word_subject'],
+                img_name: response.data[i]['EN']}
+              )
             }
             this.imgsArr = this.imgsArr.concat(arr);
             this.group++;
             console.log(this.imgsArr);
           })
       },
-      clickPic(event, {index, value}) {
-        this.$router.push('game/' + value.info['img_name']);
+      clickPic(imgName) {
+        this.$router.push('game/' + imgName);
       }
     },
 
     created() {
       this.getData();
-      if(store.state.username == 'root'){
+      if (store.state.username == 'root') {
         store.state.authority = true;
       }
       this.canEditGame = store.state.authority;
@@ -69,33 +76,27 @@
 
 
 <style>
-  #choseFile {
-    width: 0.1px;
-    height: 0.1px;
+  .gridlist-demo {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
   }
 
-  #editButton {
-    position: fixed;
-    bottom: 100px;
-    right: 80px;
+  .mu-grid-tile-titlebar {
+    height: 48px !important;
   }
 
-  .vue-waterfall-easy {
-    height: 600px !important;
+   .mu-paper-round {
+    width:100%;
+    margin-left: 0px;
   }
 
-  @media screen and (max-width: 1500px) {
-    .vue-waterfall-easy-scroll {
-      height: 500px !important;
-      width: 780px !important;
-    }
+  .mu-grid-tile-wrapper{
+    box-shadow: none;
   }
 
-  @media screen and (min-width: 1500px) {
-    .vue-waterfall-easy-scroll {
-      height: 600px !important;
-      width: 1300px !important;
-    }
+  .MuContainer{
+    margin-bottom: 56px;
   }
 </style>
 
