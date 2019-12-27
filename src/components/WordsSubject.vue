@@ -15,7 +15,6 @@
 </template>
 
 <script>
-  import vueWaterfallEasy from 'vue-waterfall-easy'
   import store from '../store.js'
 
   export default {
@@ -24,13 +23,8 @@
       return {
         imgLoc: `static/img/wordsSubject/`,
         imgsArr: [],
-        group: 0, //用于标记第几组图片的到来
       }
     },
-    components: {
-      vueWaterfallEasy
-    },
-
     methods: {
       getData() {//从后端拉取数据
         const path = '/wordSubject';
@@ -52,7 +46,6 @@
               );
             }
             this.imgsArr = this.imgsArr.concat(arr);
-            this.group++;
             console.log(this.imgsArr);
           })
       },
@@ -60,7 +53,6 @@
         this.$router.push('WordsSubject/' + wordsubject)
       }
     },
-
     created() {
       this.getData()
     }

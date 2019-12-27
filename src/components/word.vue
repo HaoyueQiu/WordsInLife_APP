@@ -1,23 +1,21 @@
 <template>
   <div>
-    <p><img id="wordsImg" :src="imgSrc"/></p>
-    <div>
-      <button type="button" class="btn btn-info" v-show="!isMeaningButtonClick" @click="clickMeaningButton">click to get
-        answer
-      </button>
+    <div @click="clickMeaningButton" id="wordMem">
+      <p><img id="wordsImg" :src="imgSrc"/></p>
+      <div v-show="!isMeaningButtonClick">
+        <p>思考单词的意思</p>
+        <p>而后点击屏幕获取答案</p>
+      </div>
+      <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>
+      <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>
+      <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio">audio</audio>
     </div>
-    <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>
-    <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>
-    <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio">audio</audio>
-
-    <div v-show="isMeaningButtonClick" class="btn-group" role="group" aria-label="Basic example">
+    <div id="buttonGroup" v-show="isMeaningButtonClick">
       <button type="button" class="btn btn-success" @click="knowWord">认识</button>
       <button type="button" class="btn btn-warning" @click="uncertainWord">不确定</button>
       <button type="button" class="btn btn-danger" @click="unknowWord">不认识</button>
     </div>
   </div>
-
-
 </template>
 
 <script>
@@ -65,7 +63,7 @@
       const payload = {
         words: this.words,
         username: store.state.username,
-      }
+      };
       this.$axios.post(path, payload)
         .then(response => {
         })
@@ -74,7 +72,10 @@
       clickMeaningButton() {
         this.isMeaningButtonClick = true;
         let audio = document.querySelector('#wordAudio');
-        audio.play();
+        if (audio) {
+          audio.play();
+        }
+        ;
       },
       getData() {
         const path = '/words'
@@ -190,14 +191,27 @@
     font-size: 20px;
   }
 
+  #buttonGroup {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .btn {
+    width: inherit;
+  }
+
+  #wordMem {
+    height: 100vh;
+  }
+
   #wordsMeaning {
     padding: 10px 0px 0px 0px;
   }
 
   #wordsImg {
-    width: auto;
-    height: 300px;
-    top: 400px;
+    width: 280px;
+    height: 100%;
   }
 
   @media screen and (max-width: 1200px) {
