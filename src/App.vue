@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <navbar></navbar>
-    <router-view />
+    <navbar id="navigation"></navbar>
+    <router-view/>
   </div>
 </template>
 
@@ -14,8 +14,8 @@
     name: 'App',
     //运训组件模板递归地调用自身，且便于调试，报错时会报名字，方便定位。
     // https://cn.vuejs.org/v2/api/#name
-    components:{
-      navbar:Navbar,
+    components: {
+      navbar: Navbar,
     }
   }
 

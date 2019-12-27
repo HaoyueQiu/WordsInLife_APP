@@ -5,9 +5,11 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
 //import VueToasted  from 'vue-toasted'
 import axios from './http'
-import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
-import VueRouter from 'vue-router';
+import VueRouter from 'vue-router'
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+
+
 //import moment from 'moment'
 
 //阻止显示生产模块的消息
@@ -16,9 +18,9 @@ Vue.config.productionTip = false
 // 将 $moment 挂载到 prototype 上，在组件中可以直接使用 this.$moment 访问
 //Vue.prototype.$moment = moment
 // 将 $axios 挂载到 prototype 上，在组件中可以直接使用 this.$axios 访问
-Vue.prototype.$axios = axios
+Vue.prototype.$axios = axios;
 
-Vue.use(ViewUI);
+Vue.use(MuseUI);
 Vue.use(VueRouter);
 
 
