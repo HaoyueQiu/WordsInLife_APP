@@ -8,6 +8,8 @@ import axios from './http'
 import VueRouter from 'vue-router'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+import ViewUI from 'view-design';
+import 'view-design/dist/styles/iview.css';
 
 
 //import moment from 'moment'
@@ -19,7 +21,7 @@ Vue.config.productionTip = false
 //Vue.prototype.$moment = moment
 // 将 $axios 挂载到 prototype 上，在组件中可以直接使用 this.$axios 访问
 Vue.prototype.$axios = axios;
-
+Vue.use(ViewUI);
 Vue.use(MuseUI);
 Vue.use(VueRouter);
 

@@ -22,56 +22,74 @@ const router =  new Router({
       // component 代表加载到相应路由上后所使用的组件
       component: Home,
       meta:{
-        requireAuth:true
+        requireAuth:true,
+        navbarActive:true,
       }
     },
     {
       path:'/login',
       name:'Login',
-      component:Login
+      component:Login,
+      meta:{
+        navbarActive: false,
+      }
     },
     {
       path:'/register',
       name:'Register',
-      component:Register
+      component:Register,
+      meta:{
+        navbarActive: false,
+      }
     },
         {
       path: '/profile',
       name: 'Profile',
       component: Profile,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        navbarActive: true,
       }
-    },
-    {
-      path: '/ping',
-      name: 'Ping',
-      component: Ping
     },
     {
       path:'/wordsSubject',
       name:'WordsSubject',
-      component:WordsSubject
+      component:WordsSubject,
+      meta:{
+        navbarActive: true,
+      }
     },
     {
       path:'/wordsSubject/:subject',
       name:'words',
-      component:Word
+      component:Word,
+      meta:{
+        navbarActive: true,
+      }
     },
     {
       path:'/game',
       name:'game',
       component:Game,
+      meta:{
+        navbarActive: true,
+      }
     },
     {
       path:'/game/:game_pic',
       name:'gamePlay',
       component:GamePlay,
+      meta:{
+        navbarActive: false,
+      }
     },
     {
       path:'/editGame',
       name:'EditGame',
       component:EditGame,
+      meta:{
+        navbarActive: true,
+      }
     },
   ]
 })

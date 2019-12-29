@@ -1,23 +1,32 @@
 <template>
   <div>
-    <p id="game_question">Where is the {{currentWord}}?</p>
-    <button id="answer_button" type="button" class="btn btn-info" v-show="!isAnswerButtonClick"
-            @click="clickMeaningButton">click to get answer</button>
-    <button type="button" class="btn btn-secondary" @click="errorModal = true">Error Submit</button>
+    <div id="game_question">Where is the {{currentWord}}?</div>
+    <mu-button id="answer_button" icon @click="clickMeaningButton">
+      <mu-icon value="wb_sunny"></mu-icon>
+    </mu-button>
 
+    <mu-button id="comment_button" icon @click="errorModal = true">
+      <mu-icon value="comment"></mu-icon>
+    </mu-button>
 
+    <mu-button id="home_button" icon @click="backHome">
+      <mu-icon value="loop"></mu-icon>
+    </mu-button>
 
     <audio :src="audioSrcSuccess" id="successAudio"></audio>
     <audio :src="audioSrcFail" id="failAudio"></audio>
     <p><img id="gameImg" :src="imgSrc" @click="testClick"/></p>
     <Modal
+      width="280"
       v-model="errorModal"
-      title="Common Modal dialog box title"
+      title="提交错误或建议"
       @on-ok="errorSubmit"
-      @on-cancel="errorCancel">
-      <p>Username: {{username}}</p>
-      <p>please input error in the box below. </p>
-      <textarea id="TextareaError" rows="4" v-model="errorText"></textarea>
+      @on-cancel="errorCancel"
+      :styles="{top: '30px'}"
+    >
+      <p>用户名: {{username}}</p>
+      <p>请输入你发觉的错误/想对本软件提出的修改建议 </p>
+      <textarea id="TextareaError" rows="3" v-model="errorText"></textarea>
     </Modal>
 
   </div>
@@ -25,11 +34,12 @@
 
 <script>
   import store from '../store'
+
   export default {
     name: 'GamePlay',
     data() {
       return {
-        username:'',
+        username: '',
         isAnswerButtonClick: false,
         words_loc: {},
         words: [],
@@ -49,7 +59,7 @@
 
         errorModal: false,
 
-        errorText:'',
+        errorText: '',
       }
     },
     components: {},
@@ -119,20 +129,23 @@
         }
         this.audioFail.play();
       },
-      errorSubmit(){
-          const path = '/findingError';
-          const payload = {
-            username:this.username,
-            errorText:this.errorText,
-          };
-        this.$axios.post(path,payload)
+      errorSubmit() {
+        const path = '/findingError';
+        const payload = {
+          username: this.username,
+          errorText: this.errorText,
+        };
+        this.$axios.post(path, payload)
           .then(response => {
             this.errorText = '';
             console.log(response);
           })
       },
-      errorCancel(){
-        this.errorText='';
+      errorCancel() {
+        this.errorText = '';
+      },
+      backHome() {
+        this.$router.push('/game')
       }
     }
   }
@@ -142,29 +155,33 @@
 
 <style scoped>
   #game_question {
-    font-size: 30px;
-    margin-left: 300px;
-
+    margin-left: 20px;
+    font-size: 14px;
   }
 
   #answer_button {
-    margin-left: 300px;
+    margin-left: 20px;
+    height: 20px;
+  }
+
+  #comment_button {
+    height: 20px;
+  }
+
+  #home_button {
+    height: 20px;
   }
 
   #gameImg {
-    /*width: 400px;
-    height: auto;*/
-    margin-left: 300px;
-    margin-top: 5px;
+    margin-left: 0;
+    margin-top: 0;
+    width: 70vw;
   }
 
-  @media screen and (max-width: 1200px) {
-
+  #TextareaError {
+    width: 100%;
   }
 
-  #TextareaError{
-    width:100%;
-  }
 </style>
 
 

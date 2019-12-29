@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <navbar id="navigation"></navbar>
-    <router-view/>
-
+    <link rel="stylesheet" href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <div v-if="$route.meta.navbarActive">
+      <navbar id="navigation"></navbar>
+      <router-view/>
+    </div>
+    <div v-if="!$route.meta.navbarActive">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -23,13 +29,13 @@
 </script>
 
 <style>
-#navigation{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  width: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
-}
+  #navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 </style>
