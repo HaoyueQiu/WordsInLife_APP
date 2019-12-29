@@ -2,10 +2,10 @@
   <mu-container class="MuContainer">
     <mu-flex justify-content="center">
       <mu-paper :z-depth="1">
-        <mu-grid-list class="gridlist-demo" :cols="1">
+        <mu-grid-list class="gridlist-demo" :cols="2">
           <mu-grid-tile v-for="tile,index in imgsArr" :key="index" @click="clickPic(tile.img_name)">
-            <img :src="tile.src" >
-            <span slot="title">{{tile.wordSubject}}</span>
+            <img :src="tile.src">
+            <span slot="title" class="gameTitle">{{tile.wordSubject}}</span>
           </mu-grid-tile>
         </mu-grid-list>
       </mu-paper>
@@ -48,9 +48,10 @@
             var arr = [];
             for (var i = 0; i < response.data.length; i++) {
               arr.push({
-                src: this.imgLoc + response.data[i]['EN'] + '.jpg',
-                wordSubject: response.data[i]['word_subject'],
-                img_name: response.data[i]['EN']}
+                  src: this.imgLoc + response.data[i]['EN'] + '.jpg',
+                  wordSubject: response.data[i]['word_subject'],
+                  img_name: response.data[i]['EN']
+                }
               )
             }
             this.imgsArr = this.imgsArr.concat(arr);
@@ -86,17 +87,26 @@
     height: 48px !important;
   }
 
-   .mu-paper-round {
-    width:100%;
+  .mu-paper-round {
+    width: 100%;
     margin-left: 0px;
   }
 
-  .mu-grid-tile-wrapper{
+  .mu-grid-tile-wrapper {
     box-shadow: none;
   }
 
-  .MuContainer{
+  .MuContainer {
     margin-bottom: 56px;
+  }
+
+  .mu-grid-tile-title-container {
+    margin-left: 0px;
+    text-align: center;
+  }
+
+  .gameTitle {
+    font-size: 20px;
   }
 </style>
 

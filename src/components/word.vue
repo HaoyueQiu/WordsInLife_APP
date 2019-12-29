@@ -1,23 +1,50 @@
+<!--竖屏-->
+<!--<template>-->
+<!--  <div>-->
+<!--    <div @click="clickMeaningButton" id="wordMem">-->
+<!--      <p><img id="wordsImg" :src="imgSrc"/></p>-->
+<!--      <div v-show="!isMeaningButtonClick">-->
+<!--        <p>思考单词的意思</p>-->
+<!--        <p>而后点击屏幕获取答案</p>-->
+<!--      </div>-->
+<!--      <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>-->
+<!--      <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>-->
+<!--      <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio">audio</audio>-->
+<!--    </div>-->
+<!--    <div id="buttonGroup" v-show="isMeaningButtonClick">-->
+<!--      <button type="button" class="btn btn-success" @click="knowWord">认识</button>-->
+<!--      <button type="button" class="btn btn-warning" @click="uncertainWord">不确定</button>-->
+<!--      <button type="button" class="btn btn-danger" @click="unknowWord">不认识</button>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</template>-->
+
 <template>
-  <div>
-    <div @click="clickMeaningButton" id="wordMem">
+  <div class="wrapper" @click="clickMeaningButton" id="wordMem">
+    <div>
       <p><img id="wordsImg" :src="imgSrc"/></p>
-      <div v-show="!isMeaningButtonClick">
-        <p>思考单词的意思</p>
-        <p>而后点击屏幕获取答案</p>
-      </div>
       <p id="wordsMeaning" v-show="isMeaningButtonClick">{{currentWord}}</p>
       <p v-show="isMeaningButtonClick">{{currentWordCN}}</p>
       <audio v-show="isMeaningButtonClick" :src="audioSrc" id="wordAudio">audio</audio>
     </div>
-    <div id="buttonGroup" v-show="isMeaningButtonClick">
-      <button type="button" class="btn btn-success" @click="knowWord">认识</button>
-      <button type="button" class="btn btn-warning" @click="uncertainWord">不确定</button>
-      <button type="button" class="btn btn-danger" @click="unknowWord">不认识</button>
 
+    <div>
+      <div v-show="!isMeaningButtonClick">
+        <div id="intro">
+          <p>思考单词的意思</p>
+          <p>而后点击屏幕获取答案</p>
+        </div>
+      </div>
+      <div id="buttonGroup" v-show="isMeaningButtonClick">
+        <button type="button" class="btn btn-success" @click.stop="knowWord">认识</button>
+        <button type="button" class="btn btn-warning" @click.stop="uncertainWord">不确定</button>
+        <button type="button" class="btn btn-danger" @click.stop="unknowWord">不认识</button>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script>
   import store from '../store.js'
@@ -71,16 +98,12 @@
     },
     methods: {
       clickMeaningButton() {
-        this.isMeaningButtonClick = true;
-        let x = document.getElementById('wordMem');
-        x.height = "auto";
-        console.log(x);
-        console.log(x.height);
-        let audio = document.querySelector('#wordAudio');
-        console.log(audio);
-        if (audio) {
-          audio.play();
-        }
+          this.isMeaningButtonClick = true;
+          let audio = document.querySelector('#wordAudio');
+          console.log(audio);
+          if (audio) {
+            audio.play();
+          }
       },
       getData() {
         const path = '/words';
@@ -145,8 +168,7 @@
         //熟练度不改变
         this.words[this.currentPicNum]['times']++;
         this.refresh();
-      }
-      ,
+      },
       refresh() {
         this.nextWord();
         this.isMeaningButtonClick = false;
@@ -157,9 +179,9 @@
           this.audioSrc = this.audioLoc + this.subject + "/" + this.currentWord + "--_gb_1.mp3";
           console.log(this.audioSrc)
         } else {
-
           this.$router.push('/wordsSubject');
         }
+
       },
 
       nextWord() {
@@ -193,21 +215,24 @@
 <style scoped>
   * {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 66.7% 33.3%;
   }
 
   #buttonGroup {
-    position: fixed;
-    width: 100%;
-    bottom: 56px;
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*bottom: 56px;*/
   }
 
   .btn {
-    width: inherit;
-  }
-
-  #wordMem {
-    height: 100vh;
+    width: 80%;
+    margin-top: 25px;
+    margin-right: 20px;
   }
 
   #wordsMeaning {
@@ -215,11 +240,18 @@
   }
 
   #wordsImg {
-    width: 280px;
-    height: 100%;
+    max-width: 280px;
+    height: 150px;
+    margin-top: 20px;
   }
 
+  #intro {
+    margin-top: 20%;
+  }
 
+  #wordMem{
+    height:90vh;
+  }
 </style>
 
 

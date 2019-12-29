@@ -173,9 +173,9 @@
   }
 
   #gameImg {
-    margin-left: 0;
-    margin-top: 0;
-    width: 70vw;
+    margin-left: 30px;
+    margin-top: 0px;
+    height: 80vh;
   }
 
   #TextareaError {

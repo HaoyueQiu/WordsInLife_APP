@@ -2,7 +2,7 @@
   <mu-container class="MuContainer">
     <mu-flex justify-content="center">
       <mu-paper :z-depth="1">
-        <mu-grid-list class="gridlist-demo">
+        <mu-grid-list class="gridlist-demo" cols="3">
           <mu-grid-tile v-for="tile,index in imgsArr" :key="index" @click="clickPic(tile.wordSubject)">
             <img :src="tile.src" >
             <span slot="title">{{tile.wordSubject}}</span>
