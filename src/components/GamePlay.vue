@@ -15,7 +15,7 @@
 
     <audio :src="audioSrcSuccess" id="successAudio"></audio>
     <audio :src="audioSrcFail" id="failAudio"></audio>
-    <p><img id="gameImg" :src="imgSrc" @click="testClick"/></p>
+    <p><img id="gameImg" :src="imgSrc" @click="testClick" @load="calculateRatio"/></p>
     <Modal
       width="280"
       v-model="errorModal"
@@ -60,6 +60,8 @@
         errorModal: false,
 
         errorText: '',
+        heightRatio: 0,
+        widthRatio: 0,
       }
     },
     components: {},
@@ -81,6 +83,14 @@
     methods: {
       clickMeaningButton() {
         this.isAnswerButtonClick = true;
+      },
+      calculateRatio() {
+        let gameImg = document.getElementById('gameImg');
+        console.log('gameImg', gameImg);
+        this.heightRatio = gameImg.height / gameImg.naturalHeight;
+        this.widthRatio = gameImg.width / gameImg.naturalWidth;
+        console.log('heightRatio', this.heightRatio);
+        console.log('widthRatio', this.widthRatio);
       },
       getData() {
         const path = '/game_word';
@@ -119,8 +129,8 @@
         let loc = this.words_loc[this.currentWord];
         console.log(loc);
         for (let i = 0; i < loc.length; ++i) {
-          console.log(i);
-          if (picX > loc[i][0] && picX < loc[i][2] && picY > loc[i][1] && picY < loc[i][3]) {
+          if (picX > (this.widthRatio * loc[i][0]) && picX < (this.widthRatio * loc[i][2])
+            && picY > (this.heightRatio * loc[i][1]) && picY < (this.heightRatio * loc[i][3])) {
             this.currentWordNum++;
             this.audioSuccess.play();
             this.isOver();

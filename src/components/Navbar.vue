@@ -6,8 +6,8 @@
       <mu-bottom-nav >
         <mu-bottom-nav-item title="单词" icon="restore" to="/wordsSubject"></mu-bottom-nav-item>
         <mu-bottom-nav-item title="游戏" icon="favorite" to="/game"></mu-bottom-nav-item>
-        <mu-bottom-nav-item title="统计" icon="timeline" to="/"></mu-bottom-nav-item>
-        <mu-bottom-nav-item title="设置" icon="settings" to="/"></mu-bottom-nav-item>
+        <mu-bottom-nav-item title="统计" icon="timeline" to="/statistics"></mu-bottom-nav-item>
+        <mu-bottom-nav-item title="设置" icon="settings" to="/setting"></mu-bottom-nav-item>
       </mu-bottom-nav>
     </mu-container>
   </div>
