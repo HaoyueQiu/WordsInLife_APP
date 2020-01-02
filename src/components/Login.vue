@@ -1,27 +1,15 @@
 <template>
   <div class="container">
-    <h1>Sign In</h1>
-    <div class="row">
-      <!--bootstrap 的栅栏布局，能够简便的通过预定义的类做出布局，最多分为12列。
-       xs (phones), sm (tablets), md (desktops), and lg (larger desktops)
-       可以通过不同的类定义在不同的大小的界面上
-       -->
-      <div class="col-md-4">
-        <!--创建表单，@是v-on:的简写，它用于监听DOM事件。
-        .prevent是为v-on提供的事件修饰符。@submit.prevent提交事件不再重载界面
-        -->
+    <h1>账号密码登录</h1>
+    <div class="wrapper">
+      <div>
         <form @submit.prevent="onSubmit">
           <div class="form-group">
-            <!--for属性能够让label与表单元素绑定，当指向lable时，表单元素也可以获得焦点
-            https://www.w3school.com.cn/tags/att_label_for.asp
-            https://www.cnblogs.com/lixlib/archive/2011/10/19/label-for.html
-            -->
             <label for="username">Username</label>
             <input type="text" v-model="loginForm.username" class="form-control"
                    v-bind:class="{'is-invalid': loginForm.usernameError}" id="username" placeholder="">
             <div v-show="loginForm.usernameError" class="invalid-feedback">{{ loginForm.usernameError }}</div>
           </div>
-          <!--form-group 便捷创造bootstrap表单https://getbootstrap.com/docs/4.3/components/forms/-->
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" v-model="loginForm.password" class="form-control"
@@ -30,6 +18,11 @@
           </div>
           <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
+      </div>
+      <div>
+        <p class="middleText">-其它方式-</p>
+        <p class="middleText">微信登录</p>
+        <p class="middleText">QQ登录</p>
       </div>
     </div>
     <br>
@@ -110,7 +103,7 @@
             store.state.authority = true;
           }
           store.loginAction();
-          this.$router.push({path: '/'})
+          this.$router.push({path: '/wordsSubject'})
           //this.$router.push({path:`/profile${this.loginForm.username}`})
         })
           .catch((error) => {
@@ -123,3 +116,14 @@
     }
   }
 </script>
+
+<style scoped>
+  .wrapper {
+    display: grid;
+    grid-template-columns: 66.7% 33.3%;
+  }
+
+  .middleText{
+    text-align: center;
+  }
+</style>
